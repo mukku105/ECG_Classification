@@ -1,1 +1,4 @@
 dataset/*
+dist/*
+build/*
+*.spec
