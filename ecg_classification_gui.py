@@ -8,6 +8,8 @@ import joblib
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
+import os
+
 class ECGClassifierApp:
     def __init__(self, root):
         self.root = root
@@ -16,8 +18,10 @@ class ECGClassifierApp:
         
         # Load model and scaler (update paths if needed)
         try:
-            self.model = load_model('/model/ecg_model.keras')
-            self.scaler = joblib.load('/model/scaler.save')
+            model_path = os.path.join(os.getcwd(), "model", "ecg_model.keras")
+            scaler_path = os.path.join(os.getcwd(), "model", "scaler.save")
+            self.model = load_model(model_path)
+            self.scaler = joblib.load(scaler_path)
         except Exception as e:
             messagebox.showerror("Error", f"Failed to load model/scaler: {str(e)}")
             self.root.destroy()
